@@ -488,4 +488,17 @@
       <option name="XML" value="true" />
     </context>
   </template>
+  <template name="odoo_form_button_object_icon" value="&lt;button name=&quot;$name$&quot; type=&quot;object&quot; icon=&quot;fa-random&quot;/&gt;&#10;" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="odoo_form_button_object_string" value="&lt;button name=&quot;$name$&quot; type=&quot;object&quot; string=&quot;$string$&quot;/&gt;&#10;" toReformat="false" toShortenFQNames="true">
+    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
 </templateSet>

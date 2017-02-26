@@ -496,7 +496,10 @@
     <variable name="form_view_name" expression="concat(model_name,&quot;.view.form&quot;)" defaultValue="" alwaysStopAt="false" />
     <variable name="action_xml_id" expression="concat(snakeCase(model_name),&quot;_action&quot;)" defaultValue="" alwaysStopAt="false" />
     <variable name="action_name" expression="capitalize(model_name)" defaultValue="" alwaysStopAt="false" />
-  </template>  
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
   <template name="odoo_form_button_object_icon" value="&lt;button name=&quot;$name$&quot; type=&quot;object&quot; icon=&quot;fa-random&quot;/&gt;&#10;" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>

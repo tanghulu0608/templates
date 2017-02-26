@@ -488,4 +488,16 @@
       <option name="XML" value="true" />
     </context>
   </template>
+  <template name="odoo_views_and_actions_for_new_model" value="&lt;record id=&quot;$tree_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$tree_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;tree&gt;&#10;            &lt;field name=&quot;name&quot;/&gt;&#10;        &lt;/tree&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$form_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$form_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;form&gt;&#10;            &lt;sheet&gt;&#10;                &lt;group&gt;&#10;                    &lt;field name=&quot;name&quot;/&gt;&#10;                &lt;/group&gt;&#10;            &lt;/sheet&gt;&#10;        &lt;/form&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$action_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$action_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;search&gt;&#10;             &#10;        &lt;/search&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="tree_view_xml_id" expression="concat(snakeCase(model_name),&quot;_view_tree&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="tree_view_name" expression="concat(model_name,&quot;.view.tree&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="form_view_xml_id" expression="concat(snakeCase(model_name),&quot;_view_form&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="form_view_name" expression="concat(model_name,&quot;.view.form&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="action_xml_id" expression="concat(snakeCase(model_name),&quot;_action&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="action_name" expression="capitalize(model_name)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
 </templateSet>

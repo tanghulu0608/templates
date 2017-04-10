@@ -513,4 +513,13 @@
       <option name="XML" value="true" />
     </context>
   </template>
+  <template name="odoo_form_icon_button" value="&lt;label for=&quot;$field_name$&quot;/&gt;&#10;&lt;div&gt;&#10;    &lt;field name=&quot;$field_name$&quot;/&gt;&#10;    &lt;button name=&quot;$action_name$&quot; type=&quot;object&quot; states=&quot;draft,sent&quot;&#10;            string=&quot;$string$&quot;&#10;            help=&quot;$help$&quot;&#10;            class=&quot;fa fa-calendar o_icon_button oe_edit_only&quot;/&gt;" toReformat="false" toShortenFQNames="true">
+    <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="action_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="help" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
 </templateSet>

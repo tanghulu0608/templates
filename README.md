@@ -4,6 +4,8 @@
 
 使用方法很简单，只要将这个库，存放到以下路径即可。或者将odoo.xml文件下载过来，放在以下路径下。
 
+适用于 pycharm 2016.3.3 及以上版本。因为代码片断里，有一个函数只有 pycharm 2016.3.3 及以上版本才能支持。
+
 ## 路径
 
 Windows: \<your home directory\>\\.\<product name\>\<version number\>\config\templates

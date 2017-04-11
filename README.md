@@ -1,6 +1,7 @@
 # templates
 
-用于pycharm的odoo开发过程中常用的代码片断。使用方法很简单，只要将这个库，存放到以下路径即可。或者将odoo.xml文件下载过来，放在以下路径下。
+这是在https://github.com/mohamedmagdy/odoo-pycharm-templates这个项目的基础上，再加入我个人常用的模板整理而成。基本上涵盖了odoo开发过程要用到的各种代码片段，提高编程效率。
+使用方法很简单，只要将这个库，存放到以下路径即可。或者将odoo.xml文件下载过来，放在以下路径下。
 
 ## 路径
 

@@ -658,7 +658,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_method_create" value="@api.model&#10;def create(self, vals):&#10;    res = super($class_name$, self).create(vals)&#10;    return res" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_method_create" value="@api.model&#10;def create(self, vals):&#10;    res = super($class_name$, self).create(vals)&#10;    return res" description="" toReformat="true" toShortenFQNames="true">
     <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />

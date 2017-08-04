@@ -7,7 +7,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_tree" value="&lt;record id=&quot;$view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;tree&gt;&#10;            &lt;field name=&quot;name&quot;/&gt;&#10;        &lt;/tree&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="Create Tree View" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_view_tree" value="&lt;record id=&quot;$view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;tree&gt;&#10;            &lt;field name=&quot;name&quot;/&gt;&#10;        &lt;/tree&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="view_xml_id" expression="concat(snakeCase(model_name),&quot;_view_tree&quot;)" defaultValue="" alwaysStopAt="false" />
     <variable name="view_name" expression="concat(model_name,&quot;.view.tree&quot;)" defaultValue="" alwaysStopAt="false" />
@@ -393,7 +393,7 @@
     </context>
   </template>
   <template name="odoo_search_view_group_by" value="&lt;filter name=&quot;$name$&quot; string=&quot;$string$&quot; context=&quot;{'group_by':'$field$'}&quot;/&gt;&#10;" description="" toReformat="false" toShortenFQNames="true">
-    <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="name" expression="" defaultValue="&quot;group_by_&quot;" alwaysStopAt="true" />
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="field" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -449,7 +449,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_form_div_for_debug" value="&lt;div groups=&quot;base.group_no_one&quot; style=&quot;background-color:lightgrey;&quot;&gt;&#10;    &lt;div name=&quot;invisible_fields&quot; style=&quot;margin-left: 20px;&quot;&gt;&#10;        &lt;br/&gt;&#10;        &lt;p&gt;&#10;            &lt;strong style=&quot;color: red;&quot;&gt;&#10;                请注意：以下内容是界面上的辅助字段。&#10;                &lt;br/&gt;&#10;                在odoo开发者模式下，为了方便程序开发调试，这些内容能看到，正常使用时会隐藏掉。&#10;            &lt;/strong&gt;&#10;        &lt;/p&gt;&#10;        &lt;p&gt;$field_name_label$：&#10;            &lt;field name=&quot;$field_name$&quot;/&gt;&#10;        &lt;/p&gt;&#10;    &lt;/div&gt;&#10;&lt;/div&gt;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_view_form_debug_div" value="&lt;div groups=&quot;base.group_no_one&quot; style=&quot;background-color:lightgrey;&quot;&gt;&#10;    &lt;div name=&quot;invisible_fields&quot; style=&quot;margin-left: 20px;&quot;&gt;&#10;        &lt;br/&gt;&#10;        &lt;p&gt;&#10;            &lt;strong style=&quot;color: red;&quot;&gt;&#10;                请注意：以下内容是界面上的辅助字段。&#10;                &lt;br/&gt;&#10;                在odoo开发者模式下，为了方便程序开发调试，这些内容能看到，正常使用时会隐藏掉。&#10;            &lt;/strong&gt;&#10;        &lt;/p&gt;&#10;        &lt;p&gt;$field_name_label$：&#10;            &lt;field name=&quot;$field_name$&quot;/&gt;&#10;        &lt;/p&gt;&#10;    &lt;/div&gt;&#10;&lt;/div&gt;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="field_name_label" expression="field_name" defaultValue="" alwaysStopAt="false" />
     <context>
@@ -584,9 +584,9 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_name_get" value="@api.multi&#10;def name_get(self):&#10;    return [($record_id$, ($record_name$)) for record in self]&#10;" description="" toReformat="true" toShortenFQNames="true">
-    <variable name="record_id" expression="" defaultValue="&quot;record.id&quot;" alwaysStopAt="true" />
-    <variable name="record_name" expression="" defaultValue="&quot;record.name + '-' + (record.country_id.name or (u'Unknow'))&quot;" alwaysStopAt="true" />
+  <template name="odoo_name_get" value="@api.multi&#10;def name_get(self):&#10;    return [($record$.id, $record_name$) for $record$ in self]&#10;" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="record" expression="" defaultValue="&quot;record&quot;" alwaysStopAt="true" />
+    <variable name="record_name" expression="" defaultValue="&quot;record.name&quot;" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />
     </context>
@@ -677,10 +677,18 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_action_domain" value="&lt;field name=&quot;domain&quot;&gt;[('$field_name$', '$operator_name$', $value$)]&lt;/field&gt;" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_action_domain" value="&lt;field name=&quot;domain&quot;&gt;[('$field_name$', '$operator_name$', $value$)]&lt;/field&gt;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="operator_name" expression="" defaultValue="&quot;=&quot;" alwaysStopAt="true" />
     <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="odoo_view_form_group_div" value="&lt;label for=&quot;$field_name$&quot; $label_style$/&gt;&#10;&lt;div $div_style$&gt;&#10;    &lt;field name=&quot;$field_name$&quot; class=&quot;oe_inline&quot;/&gt;&#10;&lt;/div&gt;" toReformat="false" toShortenFQNames="true">
+    <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="label_style" expression="" defaultValue="&quot;style=\&quot;color: red\&quot;&quot;" alwaysStopAt="true" />
+    <variable name="div_style" expression="" defaultValue="&quot;style=\&quot;color: red\&quot;&quot;" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />
     </context>

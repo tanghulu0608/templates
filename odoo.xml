@@ -33,7 +33,7 @@
   <template name="odoo_action_view" value="&lt;record id=&quot;$action_xml_id$&quot; model=&quot;ir.actions.act_window&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$action_name$&lt;/field&gt;&#10;    &lt;field name=&quot;type&quot;&gt;ir.actions.act_window&lt;/field&gt;&#10;    &lt;field name=&quot;res_model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;view_mode&quot;&gt;tree,form&lt;/field&gt;&#10;    &lt;field name=&quot;help&quot; type=&quot;html&quot;&gt;&#10;      &lt;p class=&quot;oe_view_nocontent_create&quot;&gt;&#10;        &lt;!-- Add Text Here --&gt;&#10;      &lt;/p&gt;&lt;p&gt;&#10;        &lt;!-- More details about what a user can do with this object will be OK --&gt; &#10;      &lt;/p&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="Create new Action" toReformat="false" toShortenFQNames="true">
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="action_xml_id" expression="concat(snakeCase(model_name),&quot;_action&quot;)" defaultValue="" alwaysStopAt="false" />
-    <variable name="action_name" expression="capitalize(model_name)" defaultValue="" alwaysStopAt="false" />
+    <variable name="action_name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />
     </context>
@@ -479,7 +479,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_method_action_view_something" value="@api.multi&#10;def action_view_$object$(self):&#10;    self.ensure_one()&#10;    action = self.env.ref(&quot;$action_xmlid$&quot;)&#10;    if not action:&#10;        raise UserError(u&quot;系统里找不到：$action_xmlid$ 对应的action&quot;)&#10;&#10;    action_vals = action.read()[0]&#10;    # 可以在这里改写action上原来的domain、context&#10;    action_vals[&quot;context&quot;] = {&#10;        &quot;search_default_$field_name$&quot;: $value$,&#10;        &quot;default_$field_name$&quot;: $value$,&#10;    }&#10;    return action_vals" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_model_action_view_something" value="@api.multi&#10;def action_view_$object$(self):&#10;    self.ensure_one()&#10;    action = self.env.ref(&quot;$action_xmlid$&quot;)&#10;    if not action:&#10;        raise UserError(u&quot;系统里找不到：$action_xmlid$ 对应的action&quot;)&#10;&#10;    action_vals = action.read()[0]&#10;    # 可以在这里改写action上原来的domain、context&#10;    action_vals[&quot;context&quot;] = {&#10;        &quot;search_default_$field_name$&quot;: $value$,&#10;        &quot;default_$field_name$&quot;: $value$,&#10;    }&#10;    return action_vals" description="" toReformat="true" toShortenFQNames="true">
     <variable name="object" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="action_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
@@ -636,9 +636,9 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_inherit_mode_primary" value="&lt;record id=&quot;$view_xmlid$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;inherit_id&quot; ref=&quot;$inherit_view_xmlid$&quot;/&gt;&#10;    &lt;field name=&quot;mode&quot;&gt;primary&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;xpath expr=&quot;$expr$&quot; position=&quot;&quot;&gt;&#10;            &#10;        &lt;/xpath&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_view_inherit_mode_primary" value="&lt;record id=&quot;$view_xmlid$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;inherit_id&quot; ref=&quot;$inherit_view_xmlid$&quot;/&gt;&#10;    &lt;field name=&quot;mode&quot;&gt;primary&lt;/field&gt;&#10;    &lt;field name=&quot;priority&quot;&gt;200&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;xpath expr=&quot;$expr$&quot; position=&quot;&quot;&gt;&#10;            &#10;        &lt;/xpath&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="inherit_view_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="view_xmlid" expression="concat(snakeCase(inherit_view_xmlid),&quot;_inherit&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="view_xmlid" expression="snakeCase(inherit_view_xmlid)" defaultValue="" alwaysStopAt="false" />
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="view_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="expr" expression="//field[@name='name']" defaultValue="" alwaysStopAt="true" />
@@ -659,8 +659,8 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_method_create" value="@api.model&#10;def create(self, vals):&#10;    res = super($class_name$, self).create(vals)&#10;    return res" description="" toReformat="true" toShortenFQNames="true">
-    <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="true" />
+  <template name="odoo_model_create" value="@api.model&#10;def create(self, vals):&#10;    res = super($class_name$, self).create(vals)&#10;    return res" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
     <context>
       <option name="Python" value="true" />
     </context>
@@ -685,12 +685,31 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_form_group_div" value="&lt;label for=&quot;$field_name$&quot; $label_style$/&gt;&#10;&lt;div $div_style$&gt;&#10;    &lt;field name=&quot;$field_name$&quot; class=&quot;oe_inline&quot;/&gt;&#10;&lt;/div&gt;" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_view_form_group_div" value="&lt;label for=&quot;$field_name$&quot; $label_style$/&gt;&#10;&lt;div $div_style$&gt;&#10;    &lt;field name=&quot;$field_name$&quot; class=&quot;oe_inline&quot;/&gt;&#10;&lt;/div&gt;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="label_style" expression="" defaultValue="&quot;style=\&quot;color: red\&quot;&quot;" alwaysStopAt="true" />
     <variable name="div_style" expression="" defaultValue="&quot;style=\&quot;color: red\&quot;&quot;" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="odoo_wizard_get_records" value="@api.model&#10;def get_records(self):&#10;    res_model = &quot;$res_model_name$&quot;&#10;    if self.env.context.get('active_model') == res_model and self.env.context.get('active_ids'):&#10;        return self.env[res_model].browse(self.env.context.get('active_ids'))" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="res_model_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_field_selection_dict" value="$field_name$_selection = dict($recordset_name$._columns[&quot;$field_name$&quot;].selection)" toReformat="true" toShortenFQNames="true">
+    <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="recordset_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_model_write" value="@api.multi&#10;def write(self, vals):&#10;    res = super($class_name$, self).write(vals)&#10;    return res&#10;" toReformat="false" toShortenFQNames="true">
+    <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python" value="true" />
     </context>
   </template>
 </templateSet>

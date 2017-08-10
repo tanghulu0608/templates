@@ -602,7 +602,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_unlink" value="@api.multi&#10;def unlink(self):&#10;    res = super($class_name$, self).unlink()&#10;    return res" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_model_unlink" value="@api.multi&#10;def unlink(self):&#10;    res = super($class_name$, self).unlink()&#10;    return res" description="" toReformat="true" toShortenFQNames="true">
     <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
     <context>
       <option name="Python" value="true" />
@@ -699,14 +699,14 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_field_selection_dict" value="$field_name$_selection = dict($recordset_name$._columns[&quot;$field_name$&quot;].selection)" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_field_selection_dict" value="$field_name$_selection = dict($recordset_name$._columns[&quot;$field_name$&quot;].selection)" description="" toReformat="true" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="recordset_name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_model_write" value="@api.multi&#10;def write(self, vals):&#10;    res = super($class_name$, self).write(vals)&#10;    return res&#10;" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_model_write" value="@api.multi&#10;def write(self, vals):&#10;    res = super($class_name$, self).write(vals)&#10;    return res&#10;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
     <context>
       <option name="Python" value="true" />

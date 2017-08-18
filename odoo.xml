@@ -456,7 +456,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_action_view_ids" value="&lt;!--请注意：以下的tree和form的xmlid可以不带模块名--&gt;&#10;&lt;field name=&quot;view_ids&quot; eval=&quot;[(5, 0, 0),&#10;    (0, 0, {'view_mode': 'tree', 'view_id': ref('$tree_view_xmlid$')}),&#10;    (0, 0, {'view_mode': 'form', 'view_id': ref('$form_view_xmlid$')})]&quot;/&gt;&#10;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_action_view_ids" value="&lt;!--请注意：以下的tree和form的xmlid可以不带模块名--&gt;&#10;&lt;field name=&quot;view_ids&quot; eval=&quot;[(5, 0, 0),&#10;    (0, 0, {'view_mode': 'tree', 'view_id': ref('$tree_view_xmlid$')}),&#10;    (0, 0, {'view_mode': 'form', 'view_id': ref('$form_view_xmlid$')})]&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="tree_view_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="form_view_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -526,7 +526,7 @@
   </template>
   <template name="odoo_model_new" value="class $class_name$(models.Model):&#10;    _name = &quot;$model_name$&quot;" description="建一个新的model" toReformat="true" toShortenFQNames="true">
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="class_name" expression="capitalize(camelCase(ModelName))" defaultValue="" alwaysStopAt="false" />
+    <variable name="class_name" expression="capitalize(camelCase(model_name))" defaultValue="" alwaysStopAt="false" />
     <context>
       <option name="Python" value="true" />
     </context>

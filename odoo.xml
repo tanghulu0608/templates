@@ -200,7 +200,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_search" value="&lt;record id=&quot;$search_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$search_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;search&gt;&#10;             &#10;        &lt;/search&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_view_search" value="&lt;record id=&quot;$search_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$search_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;search&gt;&#10;             &#10;        &lt;/search&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="search_view_xml_id" expression="concat(snakeCase(model_name),&quot;_view_search&quot;)" defaultValue="" alwaysStopAt="false" />
     <variable name="search_view_name" expression="concat(model_name,&quot;.view.search&quot;)" defaultValue="" alwaysStopAt="false" />
@@ -221,7 +221,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_model_import" value="from openerp import models, fields, api" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_python_import" value="from odoo import models, fields, api" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="Python" value="true" />
     </context>
@@ -270,9 +270,9 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_report" value="&lt;!-- string:是报表在菜单上的文字。 --&gt;&#10;&lt;!-- name:要写template的xmlid，8、9版本都不能省略模块名。 --&gt;&#10;&lt;report id=&quot;$id$&quot;&#10;        model=&quot;$model$&quot;&#10;        string=&quot;$string$&quot;&#10;        report_type=&quot;qweb-pdf&quot;&#10;        name=&quot;$name$&quot;&#10;        menu=&quot;$menu$&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
-    <variable name="id" expression="" defaultValue="" alwaysStopAt="true" />
-    <variable name="model" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="odoo_report" value="&lt;!-- string:是报表在菜单上的文字。 --&gt;&#10;&lt;!-- name:要写template的xmlid，8、9版本都不能省略模块名。 --&gt;&#10;&lt;!-- menu:用于控制是否显示在打印菜单，默认True --&gt;&#10;&lt;report id=&quot;$id$&quot;&#10;        model=&quot;$model_name$&quot;&#10;        string=&quot;$string$&quot;&#10;        report_type=&quot;qweb-pdf&quot;&#10;        name=&quot;$name$&quot;&#10;        menu=&quot;$menu$&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="id" expression="concat(snakeCase(model_name),&quot;_report_&quot;)" defaultValue="" alwaysStopAt="false" />
+    <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="menu" expression="" defaultValue="" alwaysStopAt="true" />
@@ -602,7 +602,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_model_unlink" value="@api.multi&#10;def unlink(self):&#10;    res = super($class_name$, self).unlink()&#10;    return res" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_model_unlink" value="@api.multi&#10;def unlink(self):&#10;    return super($class_name$, self).unlink()&#10;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
     <context>
       <option name="Python" value="true" />
@@ -708,6 +708,30 @@
   </template>
   <template name="odoo_model_write" value="@api.multi&#10;def write(self, vals):&#10;    res = super($class_name$, self).write(vals)&#10;    return res&#10;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_TransientModel_new" value="class $class_name$(models.TransientModel):&#10;    _name = &quot;$model_name$&quot;" description="建一个新的TransientModel" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="class_name" expression="capitalize(camelCase(model_name))" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_report_render_html" value="@api.multi&#10;def render_html(self, data=None):&#10;    report = self.env['report']&#10;    docs = self.env[&quot;$model_name$&quot;].browse(self.ids)&#10;    docargs = {&#10;        &quot;docs&quot;: docs,&#10;        &quot;data&quot;: data&#10;    }&#10;    return report.render(&quot;$report_template_xmlid$&quot;, docargs)" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="report_template_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_view_separator" value="&lt;separator/&gt;" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="odoo_action_view_orders" value="@api.multi&#10;def action_view_orders(self, orders, action_xmlid):&#10;    u&quot;&quot;&quot;&#10;    查看结算单，并根据传入参数是单条记录、或者是多条记录，默认显示form、或者tree视图。&#10;    :parameter orders: recordset,要查看的单据&#10;    :parameter action_xmlid: 用于查看的action的xmlid&#10;    :return: dict,临时的一个odoo action&#10;    &quot;&quot;&quot;&#10;    self.ensure_one()&#10;    if orders:&#10;        action = self.env.ref(action_xmlid)&#10;        action_vals = action.read()[0]&#10;        # 如果只是多个单据，则跳转到这个单据的tree视图，用domain过滤想到显示的记录。&#10;        if len(orders) &gt; 1:&#10;            domain = eval(action_vals[&quot;domain&quot;]) if action_vals[&quot;domain&quot;] else []&#10;            domain.append((&quot;id&quot;, &quot;in&quot;, orders.ids))&#10;            action_vals[&quot;domain&quot;] = domain&#10;        # 如果只是一个单据，则跳转到这个单据的form视图。&#10;        elif len(orders) == 1:&#10;            action_vals[&quot;view_mode&quot;] = &quot;form&quot;&#10;            action_vals[&quot;views&quot;] = [view for view in action_vals[&quot;views&quot;] if view[1] == u&quot;form&quot;]&#10;            action_vals[&quot;res_id&quot;] = orders.id&#10;        else:&#10;            action_vals = {'type': 'ir.actions.act_window_close'}&#10;        return action_vals&#10;    else:&#10;        return True" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="Python" value="true" />
     </context>

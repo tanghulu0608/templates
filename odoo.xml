@@ -21,7 +21,7 @@
     </context>
   </template>
   <template name="odoo_view_inherit" value="&lt;record id=&quot;$view_xmlid$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;inherit_id&quot; ref=&quot;$inherit_view_xmlid$&quot;/&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;xpath expr=&quot;$expr$&quot; position=&quot;&quot;&gt;&#10;            &#10;        &lt;/xpath&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
-    <variable name="inherit_view_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="inherit_view_xmlid" expression="clipboard()" defaultValue="" alwaysStopAt="false" />
     <variable name="view_xmlid" expression="concat(snakeCase(inherit_view_xmlid),&quot;_inherit&quot;)" defaultValue="" alwaysStopAt="false" />
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="view_name" expression="" defaultValue="" alwaysStopAt="true" />
@@ -159,7 +159,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_form_statusbar" value="&lt;field name=&quot;state&quot; widget=&quot;statusbar&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_view_form_statusbar" value="&lt;field name=&quot;state&quot; widget=&quot;statusbar&quot; statusbar_visible=&quot;&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="XML_TEXT" value="true" />
     </context>
@@ -705,7 +705,9 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_method_action_view_orders" value="@api.multi&#10;def action_view_orders(self, orders, action_xmlid):&#10;    u&quot;&quot;&quot;&#10;    查看结算单，并根据传入参数是单条记录、或者是多条记录，默认显示form、或者tree视图。&#10;    :parameter orders: recordset,要查看的单据&#10;    :parameter action_xmlid: 用于查看的action的xmlid&#10;    :return: dict,临时的一个odoo action&#10;    &quot;&quot;&quot;&#10;    self.ensure_one()&#10;    if orders:&#10;        action = self.env.ref(action_xmlid)&#10;        action_vals = action.read()[0]&#10;        # 如果只是多个单据，则跳转到这个单据的tree视图，用domain过滤想到显示的记录。&#10;        if len(orders) &gt; 1:&#10;            domain = eval(action_vals[&quot;domain&quot;]) if action_vals[&quot;domain&quot;] else []&#10;            domain.append((&quot;id&quot;, &quot;in&quot;, orders.ids))&#10;            action_vals[&quot;domain&quot;] = domain&#10;        # 如果只是一个单据，则跳转到这个单据的form视图。&#10;        elif len(orders) == 1:&#10;            action_vals[&quot;view_mode&quot;] = &quot;form&quot;&#10;            action_vals[&quot;views&quot;] = [view for view in action_vals[&quot;views&quot;] if view[1] == u&quot;form&quot;]&#10;            action_vals[&quot;res_id&quot;] = orders.id&#10;        else:&#10;            action_vals = {'type': 'ir.actions.act_window_close'}&#10;        return action_vals&#10;    else:&#10;        return True" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_method_action_view_orders" value="@api.multi&#10;def action_view_purchase_orders(self):&#10;    u&quot;&quot;&quot;&#10;    查看单据，如果是单条记录、或者是多条记录，默认显示form、或者tree视图。&#10;    :return: dict,临时的一个odoo action&#10;    &quot;&quot;&quot;&#10;    self.ensure_one()&#10;    # 要查看的单据&#10;    orders = $orders$&#10;    # 用于查看的action的xmlid&#10;    action_xmlid = &quot;$xmlid$&quot;&#10;    if orders:&#10;        action = self.env.ref(action_xmlid)&#10;        action_vals = action.read()[0]&#10;        context = safe_eval(action_vals.get(&quot;context&quot;, &quot;{}&quot;))&#10;        context.update({&#10;            # &quot;create&quot;: False,&#10;            # &quot;delete&quot;: False,&#10;        })&#10;        action_vals[&quot;context&quot;] = context&#10;        # 如果只是多个单据，则跳转到这个单据的tree视图，用domain过滤想到显示的记录。&#10;        if len(orders) &gt; 1:&#10;            domain = eval(action_vals[&quot;domain&quot;]) if action_vals[&quot;domain&quot;] else []&#10;            domain.append((&quot;id&quot;, &quot;in&quot;, orders.ids))&#10;            action_vals[&quot;domain&quot;] = domain&#10;        # 如果只是一个单据，则跳转到这个单据的form视图。&#10;        elif len(orders) == 1:&#10;            action_vals[&quot;view_mode&quot;] = &quot;form&quot;&#10;            action_vals[&quot;views&quot;] = [view for view in action_vals[&quot;views&quot;] if view[1] == u&quot;form&quot;]&#10;            action_vals[&quot;res_id&quot;] = orders.id&#10;        else:&#10;            action_vals = {'type': 'ir.actions.act_window_close'}&#10;        return action_vals&#10;    else:&#10;        return True" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="orders" expression="" defaultValue="self.purchase_order_ids" alwaysStopAt="true" />
+    <variable name="xmlid" expression="" defaultValue="purchase.purchase_form_action" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />
     </context>
@@ -727,7 +729,7 @@
     </context>
   </template>
   <template name="odoo_x2many_command_6" value="[(6, 0, $ids$)]" description="Replaces all existing records in the set by the ids list, equivalent to using the command 5 followed by a command 4 for each id in ids." toReformat="true" toShortenFQNames="true">
-    <variable name="ids" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="ids" expression="" defaultValue="ids" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />
       <option name="XML" value="true" />
@@ -786,8 +788,16 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_method_fields_view_get" value="@api.model&#10;def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):&#10;    &quot;&quot;&quot; fields_view_get([view_id | view_type='form'])&#10;&#10;    Get the detailed composition of the requested view like fields, model, view architecture&#10;&#10;    :param view_id: id of the view or None&#10;    :param view_type: type of the view to return if view_id is None ('form', 'tree', ...)&#10;    :param toolbar: true to include contextual actions&#10;    :param submenu: deprecated&#10;    :return: dictionary describing the composition of the requested view (including inherited views and extensions)&#10;    :raise AttributeError:&#10;                        * if the inherited view has unknown position to work with other than 'before', 'after', 'inside', 'replace'&#10;                        * if some tag other than 'position' is found in parent view&#10;    :raise Invalid ArchitectureError: if there is view type other than form, tree, calendar, search etc defined on the structure&#10;    &quot;&quot;&quot;&#10;    res = super($class_name$, self).fields_view_get(&#10;        view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)&#10;    #if self._context.get('type'):&#10;    #    doc = etree.XML(res['arch'])&#10;    #    for node in doc.xpath(&quot;//field[@name='product_id']&quot;):&#10;    #        if self._context['type'] in ('in_invoice', 'in_refund'):&#10;    #            # Hack to fix the stable version 8.0 -&gt; saas-12&#10;    #            # purchase_ok will be moved from purchase to product in master #13271&#10;    #            if 'purchase_ok' in self.env['product.template']._fields:&#10;    #                node.set('domain', &quot;[('purchase_ok', '=', True)]&quot;)&#10;    #        else:&#10;    #            node.set('domain', &quot;[('sale_ok', '=', True)]&quot;)&#10;    #    res['arch'] = etree.tostring(doc)&#10;    return res" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_method_fields_view_get" value="@api.model&#10;def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):&#10;    &quot;&quot;&quot; fields_view_get([view_id | view_type='form'])&#10;&#10;    Get the detailed composition of the requested view like fields, model, view architecture&#10;&#10;    :param view_id: id of the view or None&#10;    :param view_type: type of the view to return if view_id is None ('form', 'tree', ...)&#10;    :param toolbar: true to include contextual actions&#10;    :param submenu: deprecated&#10;    :return: dictionary describing the composition of the requested view (including inherited views and extensions)&#10;    :raise AttributeError:&#10;                        * if the inherited view has unknown position to work with other than 'before', 'after', 'inside', 'replace'&#10;                        * if some tag other than 'position' is found in parent view&#10;    :raise Invalid ArchitectureError: if there is view type other than form, tree, calendar, search etc defined on the structure&#10;    &quot;&quot;&quot;&#10;    res = super($class_name$, self).fields_view_get(&#10;        view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)&#10;    #if self._context.get('type'):&#10;    #    doc = etree.XML(res['arch'])&#10;    #    for node in doc.xpath(&quot;//field[@name='product_id']&quot;):&#10;    #        if self._context['type'] in ('in_invoice', 'in_refund'):&#10;    #            # Hack to fix the stable version 8.0 -&gt; saas-12&#10;    #            # purchase_ok will be moved from purchase to product in master #13271&#10;    #            if 'purchase_ok' in self.env['product.template']._fields:&#10;    #                node.set('domain', &quot;[('purchase_ok', '=', True)]&quot;)&#10;    #        else:&#10;    #            node.set('domain', &quot;[('sale_ok', '=', True)]&quot;)&#10;    #    res['arch'] = etree.tostring(doc)&#10;    return res" description="" toReformat="true" toShortenFQNames="true">
     <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_config_set_xxx" value="@api.multi&#10;def set_$field_name$(self):&#10;    u&quot;&quot;&quot;&#10;    将用户的设置保存到ir.values的默认值设置中。&#10;    :return: &#10;    &quot;&quot;&quot;&#10;    res = self.env['ir.values'].sudo().set_default('$setting_model$', '$field_name$',&#10;                                                   $value$)&#10;    return res" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="setting_model" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />
     </context>

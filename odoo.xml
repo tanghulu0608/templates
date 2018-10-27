@@ -15,11 +15,6 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_data" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;&lt;odoo&gt;&#10;    &lt;data&gt;&#10;    &#10;    &lt;/data&gt;&#10;&lt;/odoo&gt;" description="" toReformat="false" toShortenFQNames="true">
-    <context>
-      <option name="XML" value="true" />
-    </context>
-  </template>
   <template name="odoo_view_inherit" value="&lt;record id=&quot;$view_xmlid$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;inherit_id&quot; ref=&quot;$inherit_view_xmlid$&quot;/&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;xpath expr=&quot;$expr$&quot; position=&quot;&quot;&gt;&#10;            &#10;        &lt;/xpath&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="inherit_view_xmlid" expression="clipboard()" defaultValue="" alwaysStopAt="false" />
     <variable name="view_xmlid" expression="concat(snakeCase(inherit_view_xmlid),&quot;_inherit&quot;)" defaultValue="" alwaysStopAt="false" />
@@ -94,7 +89,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_field_one2many" value="new_field_ids = fields.One2many(comodel_name=&quot;&quot;, inverse_name=&quot;&quot;, string=&quot;&quot;, required=False, )" description="Add new field of type One2many" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_one2many" value="new_field_ids = fields.One2many(comodel_name=&quot;&quot;, inverse_name=&quot;&quot;, string=&quot;&quot;, required=False, )" description="Add new field of type One2many" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="Python" value="true" />
     </context>
@@ -144,7 +139,12 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_security_rule" value="&lt;record id=&quot;&quot; model=&quot;ir.rule&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;&lt;/field&gt;&#10;    &lt;field ref=&quot;model_name_of_model&quot; name=&quot;model_id&quot;/&gt;&#10;    &lt;field name=&quot;domain_force&quot;&gt;[('', '', )]&lt;/field&gt;&#10;    &lt;field name=&quot;perm_write&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;field name=&quot;perm_create&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;field name=&quot;perm_read&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;field name=&quot;perm_unlink&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;!-- You can attach this rule to a specific group, Or make it Global --&gt;&#10;    &lt;field name=&quot;groups&quot; eval=&quot;[(4, ref('group_id'))]&quot;/&gt;&#10;    &lt;!--&lt;field name=&quot;global&quot; eval=&quot;1&quot;/&gt; --&gt;&#10;&lt;/record&gt;" description="Create new Security Rules" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_security_rule" value="&lt;record id=&quot;&quot; model=&quot;ir.rule&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;&lt;/field&gt;&#10;    &lt;field name=&quot;model_id&quot; ref=&quot;$model_xmlid$&quot;/&gt;&#10;    &lt;field name=&quot;domain_force&quot;&gt;[('$field$', '$op$', $value$)]&lt;/field&gt;&#10;    &lt;field name=&quot;perm_write&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;field name=&quot;perm_create&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;field name=&quot;perm_read&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;field name=&quot;perm_unlink&quot; eval=&quot;1&quot;/&gt;&#10;    &lt;!-- You can attach this rule to a specific group, Or make it Global --&gt;&#10;    &lt;field name=&quot;groups&quot; eval=&quot;[(4, ref('$group_xmlid$'))]&quot;/&gt;&#10;    &lt;!--&lt;field name=&quot;global&quot; eval=&quot;1&quot;/&gt; --&gt;&#10;&lt;/record&gt;" description="Create new Security Rules" toReformat="false" toShortenFQNames="true">
+    <variable name="model_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="field" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="op" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="group_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />
     </context>
@@ -159,7 +159,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_form_statusbar" value="&lt;field name=&quot;state&quot; widget=&quot;statusbar&quot; statusbar_visible=&quot;&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_statusbar" value="&lt;field name=&quot;state&quot; widget=&quot;statusbar&quot; statusbar_visible=&quot;&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="XML_TEXT" value="true" />
     </context>
@@ -169,7 +169,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_form_title" value="&lt;div class=&quot;oe_title&quot;&gt;&#10;    &lt;label for=&quot;name&quot; class=&quot;oe_edit_only&quot;/&gt;&#10;    &lt;h1&gt;&#10;        &lt;field name=&quot;name&quot; placeholder=&quot;......&quot;/&gt;&#10;    &lt;/h1&gt;&#10;&lt;/div&gt;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_title" value="&lt;div class=&quot;oe_title&quot;&gt;&#10;    &lt;label for=&quot;name&quot; class=&quot;oe_edit_only&quot;/&gt;&#10;    &lt;h1&gt;&#10;        &lt;field name=&quot;name&quot; placeholder=&quot;......&quot;/&gt;&#10;    &lt;/h1&gt;&#10;&lt;/div&gt;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="XML" value="true" />
     </context>
@@ -195,7 +195,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_security_file_header" value="id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink&#10;,,,,,,," description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_security_file_header" value="id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink&#10;" description="" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="OTHER" value="true" />
     </context>
@@ -221,7 +221,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_form_wizard" value="&lt;record id=&quot;$form_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$form_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;form string=&quot;&quot;&gt;&#10;            &lt;group&gt;&#10;                 &#10;            &lt;/group&gt;&#10;            &lt;footer&gt;&#10;                &lt;button type=&quot;object&quot; name=&quot;$button_name$&quot; string=&quot;$button_string$&quot; class=&quot;oe_highlight&quot;/&gt;&#10;                &lt;button special=&quot;cancel&quot; string=&quot;Cancel&quot;/&gt;&#10;            &lt;/footer&gt;&#10;        &lt;/form&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_form_wizard" value="&lt;record id=&quot;$form_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$form_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;form string=&quot;&quot;&gt;&#10;            &lt;group&gt;&#10;                 &#10;            &lt;/group&gt;&#10;            &lt;footer&gt;&#10;                &lt;button type=&quot;object&quot; name=&quot;$button_name$&quot; string=&quot;$button_string$&quot; class=&quot;oe_highlight&quot;/&gt;&#10;                &lt;button special=&quot;cancel&quot; string=&quot;Cancel&quot;/&gt;&#10;            &lt;/footer&gt;&#10;        &lt;/form&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="form_view_xml_id" expression="concat(snakeCase(model_name),&quot;_view_form&quot;)" defaultValue="" alwaysStopAt="false" />
     <variable name="form_view_name" expression="concat(model_name,&quot;.view.form&quot;)" defaultValue="" alwaysStopAt="false" />
@@ -335,7 +335,9 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_sql_constraints" value="_sql_constraints = [&#10;    (&quot;code_company_uniq&quot;, &quot;unique (code,company_id)&quot;, &quot;The code of the account must be unique per company !&quot;)&#10;]" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_sql_constraints_unique" value="_sql_constraints = [&#10;    (&quot;$field_name$_uniq&quot;, &quot;unique ($field_name$,company_id)&quot;, &quot;$error_message$&quot;)&#10;]" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="error_message" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />
     </context>
@@ -381,17 +383,17 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_field_readonly" value="readonly=True," description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_readonly" value="readonly=True" description="" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_field_ondelete_restrict" value="ondelete=&quot;restrict&quot;," description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_ondelete_restrict" value="ondelete=&quot;restrict&quot;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_field_required" value="required=True," description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_required" value="required=True" description="" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="Python" value="true" />
     </context>
@@ -406,7 +408,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_attrs_invisible" value="attrs=&quot;{'invisible':[('$field_name$','$operator$',$value$)]}&quot;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_attrs_invisible" value="attrs=&quot;{'invisible':[('$field_name$','$operator$',$value$)]}&quot;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="operator" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
@@ -448,7 +450,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_priority" value="&lt;record id=&quot;base.view_country_tree&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;priority&quot;&gt;100&lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_priority" value="&lt;record id=&quot;base.view_country_tree&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;priority&quot;&gt;100&lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="XML" value="true" />
     </context>
@@ -471,7 +473,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_views_and_actions_for_new_model" value="&lt;record id=&quot;$tree_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$tree_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;tree&gt;&#10;            &lt;field name=&quot;name&quot;/&gt;&#10;        &lt;/tree&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$form_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$form_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;form&gt;&#10;            &lt;sheet&gt;&#10;                &lt;group&gt;&#10;                    &lt;field name=&quot;name&quot;/&gt;&#10;                &lt;/group&gt;&#10;            &lt;/sheet&gt;&#10;        &lt;/form&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$search_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$search_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;search&gt;&#10;             &lt;!-- todo 对于主单据之类的，有独立入口菜单的模型，一定要写好search view，否则用户体验非常不好。 --&gt;&#10;             &lt;!-- 如果主单据有启用 active 归档，过滤器一定要写好filter --&gt;&#10;        &lt;/search&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$action_xml_id$&quot; model=&quot;ir.actions.act_window&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$action_name$&lt;/field&gt;&#10;    &lt;field name=&quot;type&quot;&gt;ir.actions.act_window&lt;/field&gt;&#10;    &lt;field name=&quot;res_model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;view_mode&quot;&gt;tree,form&lt;/field&gt;&#10;    &lt;field name=&quot;help&quot; type=&quot;html&quot;&gt;&#10;      &lt;p class=&quot;oe_view_nocontent_create&quot;&gt;&#10;        &lt;!-- Add Text Here --&gt;&#10;      &lt;/p&gt;&lt;p&gt;&#10;        &lt;!-- More details about what a user can do with this object will be OK --&gt; &#10;      &lt;/p&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_views_and_actions_for_new_model" value="&lt;record id=&quot;$tree_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$tree_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;tree&gt;&#10;            &lt;field name=&quot;name&quot;/&gt;&#10;        &lt;/tree&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$form_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$form_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;form&gt;&#10;            &lt;sheet&gt;&#10;                &lt;group col=&quot;4&quot;&gt;&#10;                    &lt;field name=&quot;name&quot;/&gt;&#10;                &lt;/group&gt;&#10;            &lt;/sheet&gt;&#10;        &lt;/form&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$search_view_xml_id$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$search_view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;search&gt;&#10;             &lt;!-- todo 对于主单据之类的，有独立入口菜单的模型，一定要写好search view，否则用户体验非常不好。 --&gt;&#10;             &lt;!-- 如果主单据有启用 active 归档，过滤器一定要写好filter --&gt;&#10;        &lt;/search&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;&#10;&#10;&lt;record id=&quot;$action_xml_id$&quot; model=&quot;ir.actions.act_window&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$action_name$&lt;/field&gt;&#10;    &lt;field name=&quot;type&quot;&gt;ir.actions.act_window&lt;/field&gt;&#10;    &lt;field name=&quot;res_model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;view_mode&quot;&gt;tree,form&lt;/field&gt;&#10;    &lt;field name=&quot;help&quot; type=&quot;html&quot;&gt;&#10;      &lt;p class=&quot;oe_view_nocontent_create&quot;&gt;&#10;        &lt;!-- Add Text Here --&gt;&#10;      &lt;/p&gt;&lt;p&gt;&#10;        &lt;!-- More details about what a user can do with this object will be OK --&gt; &#10;      &lt;/p&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="tree_view_xml_id" expression="concat(snakeCase(model_name),&quot;_view_tree&quot;)" defaultValue="" alwaysStopAt="false" />
     <variable name="tree_view_name" expression="concat(model_name,&quot;.view.tree&quot;)" defaultValue="" alwaysStopAt="false" />
@@ -485,13 +487,13 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_button_object_icon" value="&lt;button name=&quot;$name$&quot; type=&quot;object&quot; icon=&quot;fa-random&quot;/&gt;&#10;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_button_object_icon" value="&lt;button name=&quot;$name$&quot; type=&quot;object&quot; icon=&quot;fa-random&quot;/&gt;&#10;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_button_object_string" value="&lt;button name=&quot;$name$&quot; type=&quot;object&quot; string=&quot;$string$&quot;/&gt;&#10;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_button_object_string" value="&lt;button name=&quot;$name$&quot; type=&quot;object&quot; string=&quot;$string$&quot;/&gt;&#10;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -505,7 +507,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_field" value="&lt;field name=&quot;$field_name$&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_field" value="&lt;field name=&quot;$field_name$&quot;/&gt;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />
@@ -550,7 +552,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_attrs_readonly" value="attrs=&quot;{'readonly':[('$field_name$','$operator$',$value$)]}&quot;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_attrs_readonly" value="attrs=&quot;{'readonly':[('$field_name$','$operator$',$value$)]}&quot;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="operator" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
@@ -582,24 +584,24 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_inhert_position_attributes" value="position=&quot;attributes&quot;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_position_attributes" value="position=&quot;attributes&quot;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_inhert_attribute" value="&lt;attribute name=&quot;$attribute_name$&quot;&gt;$attribute_value$&lt;/attribute&gt;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_attribute" value="&lt;attribute name=&quot;$attribute_name$&quot;&gt;$attribute_value$&lt;/attribute&gt;" description="" toReformat="true" toShortenFQNames="true">
     <variable name="attribute_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="attribute_value" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_field_sequence_handle" value="&lt;field name=&quot;sequence&quot; widget=&quot;handle&quot;/&gt;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_field_sequence_handle" value="&lt;field name=&quot;sequence&quot; widget=&quot;handle&quot;/&gt;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_inhert_position_replace" value="position=&quot;replace&quot;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_position_replace" value="position=&quot;replace&quot;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="XML" value="true" />
     </context>
@@ -611,7 +613,7 @@
     </context>
   </template>
   <template name="odoo_view_inherit_mode_primary" value="&lt;record id=&quot;$view_xmlid$&quot; model=&quot;ir.ui.view&quot;&gt;&#10;    &lt;field name=&quot;name&quot;&gt;$view_name$&lt;/field&gt;&#10;    &lt;field name=&quot;model&quot;&gt;$model_name$&lt;/field&gt;&#10;    &lt;field name=&quot;inherit_id&quot; ref=&quot;$inherit_view_xmlid$&quot;/&gt;&#10;    &lt;field name=&quot;mode&quot;&gt;primary&lt;/field&gt;&#10;    &lt;field name=&quot;priority&quot;&gt;200&lt;/field&gt;&#10;    &lt;field name=&quot;arch&quot; type=&quot;xml&quot;&gt;&#10;        &lt;xpath expr=&quot;$expr$&quot; position=&quot;&quot;&gt;&#10;            &#10;        &lt;/xpath&gt;&#10;    &lt;/field&gt;&#10;&lt;/record&gt;" description="" toReformat="false" toShortenFQNames="true">
-    <variable name="inherit_view_xmlid" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="inherit_view_xmlid" expression="clipboard()" defaultValue="" alwaysStopAt="false" />
     <variable name="view_xmlid" expression="snakeCase(inherit_view_xmlid)" defaultValue="" alwaysStopAt="false" />
     <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="view_name" expression="" defaultValue="" alwaysStopAt="true" />
@@ -620,7 +622,7 @@
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_view_button_action_string" value="&lt;button name=&quot;%($action_name$)d&quot; type=&quot;action&quot; string=&quot;$string$&quot;/&gt;&#10;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_button_action_string" value="&lt;button name=&quot;%($action_name$)d&quot; type=&quot;action&quot; string=&quot;$string$&quot;/&gt;&#10;" description="" toReformat="false" toShortenFQNames="true">
     <variable name="action_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="string" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -639,7 +641,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_inhert_position_after" value="position=&quot;after&quot;" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_position_after" value="position=&quot;after&quot;" description="" toReformat="true" toShortenFQNames="true">
     <context>
       <option name="XML" value="true" />
     </context>
@@ -673,7 +675,7 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_field_selection_dict" value="$field_name$_selection = dict($recordset_name$._columns[&quot;$field_name$&quot;].selection)" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_field_selection_dict" value="$field_name$_selection = dict($recordset_name$._fields[&quot;$field_name$&quot;].selection)" description="" toReformat="true" toShortenFQNames="true">
     <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="recordset_name" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
@@ -700,12 +702,13 @@
       <option name="Python" value="true" />
     </context>
   </template>
-  <template name="odoo_view_separator" value="&lt;separator/&gt;" description="" toReformat="false" toShortenFQNames="true">
+  <template name="odoo_separator" value="&lt;separator/&gt;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="XML" value="true" />
     </context>
   </template>
-  <template name="odoo_method_action_view_orders" value="@api.multi&#10;def action_view_purchase_orders(self):&#10;    u&quot;&quot;&quot;&#10;    查看单据，如果是单条记录、或者是多条记录，默认显示form、或者tree视图。&#10;    :return: dict,临时的一个odoo action&#10;    &quot;&quot;&quot;&#10;    self.ensure_one()&#10;    # 要查看的单据&#10;    orders = $orders$&#10;    # 用于查看的action的xmlid&#10;    action_xmlid = &quot;$xmlid$&quot;&#10;    if orders:&#10;        action = self.env.ref(action_xmlid)&#10;        action_vals = action.read()[0]&#10;        context = safe_eval(action_vals.get(&quot;context&quot;, &quot;{}&quot;))&#10;        context.update({&#10;            # &quot;create&quot;: False,&#10;            # &quot;delete&quot;: False,&#10;        })&#10;        action_vals[&quot;context&quot;] = context&#10;        # 如果只是多个单据，则跳转到这个单据的tree视图，用domain过滤想到显示的记录。&#10;        if len(orders) &gt; 1:&#10;            domain = eval(action_vals[&quot;domain&quot;]) if action_vals[&quot;domain&quot;] else []&#10;            domain.append((&quot;id&quot;, &quot;in&quot;, orders.ids))&#10;            action_vals[&quot;domain&quot;] = domain&#10;        # 如果只是一个单据，则跳转到这个单据的form视图。&#10;        elif len(orders) == 1:&#10;            action_vals[&quot;view_mode&quot;] = &quot;form&quot;&#10;            action_vals[&quot;views&quot;] = [view for view in action_vals[&quot;views&quot;] if view[1] == u&quot;form&quot;]&#10;            action_vals[&quot;res_id&quot;] = orders.id&#10;        else:&#10;            action_vals = {'type': 'ir.actions.act_window_close'}&#10;        return action_vals&#10;    else:&#10;        return True" description="" toReformat="true" toShortenFQNames="true">
+  <template name="odoo_method_action_view_orders" value="@api.multi&#10;def action_view_$order_name$_orders(self):&#10;    u&quot;&quot;&quot;&#10;    查看单据，如果是单条记录、或者是多条记录，默认显示form、或者tree视图。&#10;    :return: dict,临时的一个odoo action&#10;    &quot;&quot;&quot;&#10;    self.ensure_one()&#10;    # 要查看的单据&#10;    orders = $orders$&#10;    # 用于查看的action的xmlid&#10;    action_xmlid = &quot;$xmlid$&quot;&#10;    if orders:&#10;        action = self.env.ref(action_xmlid)&#10;        action_vals = action.read()[0]&#10;        context = safe_eval(action_vals.get(&quot;context&quot;, &quot;{}&quot;))&#10;        context.update({&#10;            # &quot;create&quot;: False,&#10;            # &quot;delete&quot;: False,&#10;        })&#10;        action_vals[&quot;context&quot;] = context&#10;        # 如果只是多个单据，则跳转到这个单据的tree视图，用domain过滤想到显示的记录。&#10;        if len(orders) &gt; 1:&#10;            domain = eval(action_vals[&quot;domain&quot;]) if action_vals[&quot;domain&quot;] else []&#10;            domain.append((&quot;id&quot;, &quot;in&quot;, orders.ids))&#10;            action_vals[&quot;domain&quot;] = domain&#10;        # 如果只是一个单据，则跳转到这个单据的form视图。&#10;        elif len(orders) == 1:&#10;            action_vals[&quot;view_mode&quot;] = &quot;form&quot;&#10;            action_vals[&quot;views&quot;] = [view for view in action_vals[&quot;views&quot;] if view[1] == u&quot;form&quot;]&#10;            action_vals[&quot;res_id&quot;] = orders.id&#10;        else:&#10;            action_vals = {'type': 'ir.actions.act_window_close'}&#10;        return action_vals&#10;    else:&#10;        return True" description="查看单据，如果是单条记录、或者是多条记录，默认显示form、或者tree视图。" toReformat="true" toShortenFQNames="true">
+    <variable name="order_name" expression="" defaultValue="" alwaysStopAt="true" />
     <variable name="orders" expression="" defaultValue="self.purchase_order_ids" alwaysStopAt="true" />
     <variable name="xmlid" expression="" defaultValue="purchase.purchase_form_action" alwaysStopAt="true" />
     <context>
@@ -729,7 +732,7 @@
     </context>
   </template>
   <template name="odoo_x2many_command_6" value="[(6, 0, $ids$)]" description="Replaces all existing records in the set by the ids list, equivalent to using the command 5 followed by a command 4 for each id in ids." toReformat="true" toShortenFQNames="true">
-    <variable name="ids" expression="" defaultValue="ids" alwaysStopAt="true" />
+    <variable name="ids" expression="" defaultValue="&quot;ids&quot;" alwaysStopAt="true" />
     <context>
       <option name="Python" value="true" />
       <option name="XML" value="true" />
@@ -803,6 +806,57 @@
     </context>
   </template>
   <template name="odoo_control_interface_return" value="def interface_return(func):&#10;    &quot;&quot;&quot;&#10;    统一接口函数的返回值&#10;    :param func:&#10;    :return:&#10;    &quot;&quot;&quot;&#10;&#10;    @wraps(func)&#10;    def wrapper(*args, **kwargs):&#10;        response = http.Response(content_type=&quot;application/json&quot;)&#10;        try:&#10;            func_res = func(*args, **kwargs)&#10;            res = {&#10;                &quot;msg&quot;: &quot;success&quot;,&#10;            }&#10;            if func_res is not None:&#10;                res[&quot;data&quot;] = func_res&#10;            response.set_data(json.dumps(res))&#10;        except InterfaceError as ie:&#10;            response.set_data(json.dumps({&#10;                &quot;code&quot;: ie.code,&#10;                &quot;result&quot;: &quot;fail&quot;,&#10;                &quot;msg&quot;: ie.msg&#10;            }))&#10;        except Exception as e:&#10;            response.set_data(json.dumps({&#10;                &quot;result&quot;: &quot;fail&quot;,&#10;                &quot;msg&quot;: str(e)&#10;            }))&#10;        return response&#10;&#10;    return wrapper&#10;" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_field_name_generate_by_sequence" value="name = fields.Char(string=u&quot;$field_name$&quot;, required=True, index=True, copy=False, default='/', readonly=True)&#10;&#10;@api.model&#10;def create(self, vals):&#10;    if vals.get('name', '/') == '/':&#10;        vals['name'] = self.env['ir.sequence'].next_by_code('$sequence_code$') or '/'&#10;    return super($class_name$, self).create(vals)" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="sequence_code" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="class_name" expression="pyClassName()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_ondelete_cascade" value="ondelete=&quot;cascade&quot;" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_model_new_with_lines" value="class $class_name$(models.Model):&#10;    _name = &quot;$model_name$&quot;&#10;    &#10;    line_ids = fields.One2many(&quot;$model_name$.line&quot;, &quot;$field_name$&quot;)&#10;&#10;&#10;class $class_name$Line(models.Model):&#10;    _name = &quot;$model_name$.line&quot;&#10;    &#10;    $field_name$ = fields.Many2one(&quot;$model_name$&quot;, ondelete=&quot;cascade&quot;)" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="model_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="class_name" expression="capitalize(camelCase(model_name))" defaultValue="" alwaysStopAt="false" />
+    <variable name="field_name" expression="" defaultValue="&quot;order_id&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_method_view_orders" value="@api.multi&#10;def view_$order_name$_orders(self, orders,action_xmlid):&#10;    u&quot;&quot;&quot;&#10;    查看单据，如果是单条记录、或者是多条记录，默认显示form、或者tree视图。&#10;    :return: dict,临时的一个odoo action&#10;    &quot;&quot;&quot;&#10;    self.ensure_one()&#10;    if orders:&#10;        action = self.env.ref(action_xmlid)&#10;        action_vals = action.read()[0]&#10;        context = safe_eval(action_vals.get(&quot;context&quot;, &quot;{}&quot;))&#10;        context.update({&#10;            # &quot;create&quot;: False,&#10;            # &quot;delete&quot;: False,&#10;        })&#10;        action_vals[&quot;context&quot;] = context&#10;        # 如果只是多个单据，则跳转到这个单据的tree视图，用domain过滤想到显示的记录。&#10;        if len(orders) &gt; 1:&#10;            domain = eval(action_vals[&quot;domain&quot;]) if action_vals[&quot;domain&quot;] else []&#10;            domain.append((&quot;id&quot;, &quot;in&quot;, orders.ids))&#10;            action_vals[&quot;domain&quot;] = domain&#10;        # 如果只是一个单据，则跳转到这个单据的form视图。&#10;        elif len(orders) == 1:&#10;            action_vals[&quot;view_mode&quot;] = &quot;form&quot;&#10;            action_vals[&quot;views&quot;] = [view for view in action_vals[&quot;views&quot;] if view[1] == u&quot;form&quot;]&#10;            action_vals[&quot;res_id&quot;] = orders.id&#10;        else:&#10;            action_vals = {'type': 'ir.actions.act_window_close'}&#10;        return action_vals&#10;    else:&#10;        return True" description="查看单据，如果是单条记录、或者是多条记录，默认显示form、或者tree视图。" toReformat="true" toShortenFQNames="true">
+    <variable name="order_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_interface_return" value="def interface_return(func):&#10;    &quot;&quot;&quot;&#10;    统一接口函数的返回值&#10;    :param func:&#10;    :return:&#10;    &quot;&quot;&quot;&#10;&#10;    @wraps(func)&#10;    def wrapper(*args, **kwargs):&#10;        response = Response()&#10;        try:&#10;            func_res = func(*args, **kwargs)&#10;            res = {&#10;                &quot;result&quot;: &quot;success&quot;,&#10;            }&#10;            if func_res is not None:&#10;                res[&quot;data&quot;] = func_res&#10;            response.set_data(json.dumps(res))&#10;        except Exception as e:&#10;            response.set_data(json.dumps({&#10;                &quot;result&quot;: &quot;fail&quot;,&#10;                &quot;errmsg&quot;: str(e)&#10;            }))&#10;        return response&#10;&#10;    return wrapper&#10;" description="统一接口函数的返回值" toReformat="false" toShortenFQNames="true" />
+  <template name="odoo_attrs_required" value="attrs=&quot;{'required':[('$field_name$','$operator$',$value$)]}&quot;" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="field_name" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="operator" expression="" defaultValue="" alwaysStopAt="true" />
+    <variable name="value" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="odoo_position_before" value="position=&quot;before&quot;" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="XML" value="true" />
+    </context>
+  </template>
+  <template name="odoo_states" value="READONLY_STATES = {&#10;    'in_progress': [('readonly', True)],&#10;    'done': [('readonly', True)],&#10;    'cancel': [('readonly', True)],&#10;}" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="Python" value="true" />
+    </context>
+  </template>
+  <template name="odoo_logger" value="import logging&#10;_logger = logging.getLogger(__name__)&#10;" description="" toReformat="false" toShortenFQNames="true">
     <context>
       <option name="Python" value="true" />
     </context>

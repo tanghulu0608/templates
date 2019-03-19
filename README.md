@@ -6,8 +6,6 @@
 
 适用于 pycharm 2016.3.3 及以上版本。因为代码片断里，有一个函数只有 pycharm 2016.3.3 及以上版本才能支持。
 
-![使用效果截图](http://www.wangting.name/wp-content/uploads/2016/04/pycharm_live_template_screen_shoot.png)
-
 ## 路径
 
 Windows: \<your home directory\>\\.\<product name\>\<version number\>\config\templates
